@@ -1,0 +1,29 @@
+version: "3"
+
+networks:
+    platable:
+        driver: bridge
+        external: false
+        name: platable
+        ipam:
+            config:
+                - subnet: 172.10.0.0/16
+
+services:
+    platable_backend_prototype:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            network: host
+        container_name: platable_backend_prototype
+        env_file:
+            - ./.env.development
+        hostname: platable_backend_prototype
+        image: platable/backend_prototype:1.0
+        restart: unless-stopped
+        tty: true
+        networks:
+            platable:
+                ipv4_address: 172.10.1.1
+        volumes:
+            - .:/app

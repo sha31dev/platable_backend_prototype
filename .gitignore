@@ -1,0 +1,23 @@
+# Distribution.
+*.egg
+*.egg-info/
+build/
+dist/
+
+# Logs.
+*.log*
+
+# Python.
+__pycache__/
+.mypy_cache/
+
+# Secrets.
+*.env*
+!.env.example
+
+# Tests.
+.coverage
+.coverage.*
+
+# Settings.
+.vscode/

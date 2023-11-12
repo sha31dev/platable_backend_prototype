@@ -1,0 +1,56 @@
+[tool.poetry]
+name = "platable_backend_prototype"
+version = "1.0.0"
+keywords = ["Boilerplate", "Python"]
+description = ""
+authors = ["Syed Hammad Ahmed <syedhammadahmed.dev@gmail.com>"]
+license = "MIT"
+include = ["LICENSE"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+asyncpg = "0.24.0"
+sqlalchemy = "1.4"
+
+[tool.poetry.dev-dependencies]
+black = "22.6.0"
+coverage = "6.4.1"
+lxml = "4.9.2"
+mypy = "0.971"
+pylint = "2.14.5"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
+
+[tool.coverage.run]
+branch = true
+omit = [".*", "*/site-packages/*", "*tests*"]
+
+[tool.coverage.report]
+omit = [".*", "*/site-packages/*", "*tests*"]
+fail_under = 75
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[tool.pylint]
+fail-under = 7.5
+
+[tool.pylint.messages_control]
+disable = """
+broad-except,
+invalid-name,
+missing-docstring,
+too-few-public-methods,
+too-many-arguments,
+too-many-instance-attributes,
+wrong-import-order
+"""
+
+[tool.pylint.format]
+max-line-length = 100
