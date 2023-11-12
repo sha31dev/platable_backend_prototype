@@ -61,10 +61,7 @@ class DonationEntity(Entity):
         nullable=False,
     )
 
-    created_at = Column(
-        DateTime,
-        default=datetime.utcnow
-    )
+    created_at = Column(DateTime, default=datetime.utcnow)
 
     quantity = Column(
         Integer,

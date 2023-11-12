@@ -22,7 +22,7 @@ class RecipientEntity(Entity):
                 "POSTGRES_SCHEMA",
                 "platable",
             ),
-        }
+        },
     )
 
     id = Column(
@@ -38,10 +38,7 @@ class RecipientEntity(Entity):
         unique=True,
     )
 
-    created_at = Column(
-        DateTime,
-        default=datetime.utcnow
-    )
+    created_at = Column(DateTime, default=datetime.utcnow)
 
     contact = Column(
         String,

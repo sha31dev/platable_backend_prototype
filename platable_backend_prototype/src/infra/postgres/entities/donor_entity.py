@@ -22,7 +22,7 @@ class DonorEntity(Entity):
                 "POSTGRES_SCHEMA",
                 "platable",
             ),
-        }
+        },
     )
 
     id = Column(
@@ -37,11 +37,8 @@ class DonorEntity(Entity):
         index=True,
         unique=True,
     )
-    
-    created_at = Column(
-        DateTime,
-        default=datetime.utcnow
-    )
+
+    created_at = Column(DateTime, default=datetime.utcnow)
 
     contact = Column(
         String,
@@ -56,7 +53,7 @@ class DonorEntity(Entity):
     )
 
     food_items = relationship(
-        "DonorEntity",
+        "FoodItemEntity",
         back_populates="donor",
         lazy="subquery",
         uselist=True,

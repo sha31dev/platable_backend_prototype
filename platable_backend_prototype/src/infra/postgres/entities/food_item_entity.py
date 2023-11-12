@@ -2,6 +2,7 @@ import os
 import uuid
 from datetime import datetime
 from sqlalchemy import (
+    Boolean,
     Column,
     DateTime,
     Integer,
@@ -38,30 +39,29 @@ class FoodItemEntity(Entity):
         autoincrement=True,
         primary_key=True,
     )
-    
+
     donor_id = Column(
         Integer,
         index=True,
         nullable=False,
     )
-    
+
     food_item_id = Column(
         UUID(as_uuid=True),
         default=uuid.uuid4,
         index=True,
         unique=True,
     )
-    
-    created_at = Column(
-        DateTime,
-        default=datetime.utcnow
+
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    description = Column(String, nullable=False)
+
+    is_active = Column(
+        Boolean,
+        default=True,
     )
-    
-    description = Column(
-        String,
-        nullable=False
-    )
-    
+
     name = Column(
         String,
         index=True,

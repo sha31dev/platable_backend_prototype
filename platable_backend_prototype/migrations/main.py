@@ -17,7 +17,7 @@ async def main():
     config = postgres.Config(
         database=os.getenv("POSTGRES_DATABASE", "platable"),
         drivername=os.getenv("POSTGRES_DRIVERNAME", "postgresql+asyncpg"),
-        host=os.getenv("POSTGRES_DATABASE", "172.10.0.2"),
+        host=os.getenv("POSTGRES_HOST", "172.10.0.2"),
         password=os.getenv("POSTGRES_PASSWORD", "Eos32Ty8"),
         port=os.getenv("POSTGRES_PORT", 5432),
         username=os.getenv("POSTGRES_USERNAME", "postgres"),
@@ -34,7 +34,7 @@ async def main():
         await connection.run_sync(postgres.Entity.metadata.create_all)
 
         directory = os.path.dirname(os.path.abspath(__file__))
-        
+
         file = f"{directory}/dumps/donors.json"
         with open(file=file, encoding="utf-8") as file:
             await connection.execute(
@@ -53,12 +53,14 @@ async def main():
         with open(file=file, encoding="utf-8") as file:
             rows = json.load(file)
             for row in rows:
-                row.update({
-                    "expiry_at": datetime.strptime(
-                        row.get("expiry_at"),
-                        "%Y-%m-%dT%H:%M:%S",
-                    ),
-                })
+                row.update(
+                    {
+                        "expiry_at": datetime.strptime(
+                            row.get("expiry_at"),
+                            "%Y-%m-%dT%H:%M:%S",
+                        ),
+                    }
+                )
 
             await connection.execute(
                 postgres.entities.BatchEntity.__table__.insert(),
@@ -76,13 +78,15 @@ async def main():
         with open(file=file, encoding="utf-8") as file:
             rows = json.load(file)
             for row in rows:
-                row.update({
-                    "created_at": datetime.strptime(
-                        row.get("created_at"),
-                        "%Y-%m-%dT%H:%M:%S",
-                    ),
-                })
-            
+                row.update(
+                    {
+                        "created_at": datetime.strptime(
+                            row.get("created_at"),
+                            "%Y-%m-%dT%H:%M:%S",
+                        ),
+                    }
+                )
+
             await connection.execute(
                 postgres.entities.DonationEntity.__table__.insert(),
                 rows,

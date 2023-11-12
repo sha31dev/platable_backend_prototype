@@ -76,7 +76,7 @@ class Repository(ABC):
 
             if patch:
                 rows = [row for row in results.fetchall()]
-                
+
                 for index, row in enumerate(rows):
                     row = row._asdict()
                     for key in row.keys():
@@ -165,7 +165,11 @@ class Repository(ABC):
 
                 rows.append(properties)
 
-            query = insert(entities[0].__table__).values(rows).returning(type(entities[0]) if patch else None)
+            query = (
+                insert(entities[0].__table__)
+                .values(rows)
+                .returning(type(entities[0]) if patch else None)
+            )
 
             if update:
                 query = query.on_conflict_do_update(
@@ -179,7 +183,7 @@ class Repository(ABC):
 
             if patch:
                 rows = [row for row in results.fetchall()]
-                
+
                 for index, row in enumerate(rows):
                     row = row._asdict()
                     for key in row.keys():

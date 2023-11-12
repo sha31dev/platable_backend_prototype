@@ -89,15 +89,15 @@ class UnitOfWork:
             while self.__session_pool.empty():
                 delay = 0 if delay > 20 else delay
                 delay += 5
-                await asyncio.sleep(delay/10)
-        
+                await asyncio.sleep(delay / 10)
+
         current_session = await self.__session_pool.get()
 
         for repository in self.repositories:
             repository.session = current_session
 
         logger.info("Database session established.")
-        
+
         try:
             yield current_session
         except Exception as exception:
@@ -113,7 +113,7 @@ class UnitOfWork:
             )
 
             raise exception
-        
+
         await self.__session_pool.put(current_session)
 
     def add_repository(self, repository: Repository):

@@ -40,7 +40,7 @@ class Config:
     @property
     def port(self) -> int:
         return self.__port
-    
+
     @property
     def username(self) -> str:
         return self.__username

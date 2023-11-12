@@ -44,22 +44,16 @@ class BatchEntity(Entity):
         index=True,
         unique=True,
     )
-    
+
     food_item_id = Column(
         Integer,
         index=True,
         nullable=False,
     )
 
-    created_at = Column(
-        DateTime,
-        default=datetime.utcnow
-    )
+    created_at = Column(DateTime, default=datetime.utcnow)
 
-    expiry_at = Column(
-        DateTime,
-        default=datetime.utcnow
-    )
+    expiry_at = Column(DateTime, default=datetime.utcnow)
 
     quantity = Column(
         Integer,
@@ -68,7 +62,7 @@ class BatchEntity(Entity):
     )
 
     donations = relationship(
-        "BatchEntity",
+        "DonationEntity",
         back_populates="batch",
         lazy="subquery",
         uselist=True,
