@@ -1,0 +1,34 @@
+version: "3"
+
+networks:
+    platable:
+        driver: bridge
+        external: false
+        name: platable
+        ipam:
+            config:
+                - subnet: 172.10.0.0/16
+
+services:
+    platable_postgres:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            network: host
+        container_name: platable_postgres
+        env_file:
+            - ./.env.development
+        hostname: platable_postgres
+        image: platable/postgres:1.0
+        restart: unless-stopped
+        tty: true
+        networks:
+            platable:
+                ipv4_address: 172.10.0.2
+        volumes:
+            - platable_postgres:/var/lib/postgres/data
+
+volumes:
+    platable_postgres:
+        driver: local
+        name: platable_postgres
