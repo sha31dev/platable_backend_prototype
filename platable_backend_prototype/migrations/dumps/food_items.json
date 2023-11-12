@@ -1,0 +1,12 @@
+[
+    {
+        "donor_id": 1,
+        "description": "Hand-breaded crispy fried chicken fried to perfection in house.",
+        "name": "Fried Chicken"
+    },
+    {
+        "donor_id": 2,
+        "description": "Crème Milk Chocolate with Crushed M&M's inside which guarantees to make you happy!",
+        "name": "Chocolate Cupcake"
+    }
+]
