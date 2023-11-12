@@ -18,4 +18,4 @@ COPY pyproject.toml /app/
 
 RUN poetry install
 
-CMD /bin/bash
+CMD python /app/migrations/main.py && python /app/bin/main.py
