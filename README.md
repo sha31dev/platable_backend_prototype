@@ -18,4 +18,4 @@ Once PostgreSQL is up, configure environemnt variables for the app. Inside the p
 docker-compose up -d --build
 ```
 
-Now we have both containers (database and app) up and running.
+Now we have both containers (database and app) up and running. To access the APIs documentation go to the url [http://172.10.1.1:5000/docs](http://172.10.1.1:5000/docs).
