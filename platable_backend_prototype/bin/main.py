@@ -1,4 +1,5 @@
 import asyncio
+import json
 import os
 import sys
 from importlib import import_module
@@ -43,6 +44,7 @@ async def main():
         ]
     )
 
+    server.set_openapi(json.load(open(f"{root_directory}/docs/api/swagger.json", "r")))
     server.start()
 
 

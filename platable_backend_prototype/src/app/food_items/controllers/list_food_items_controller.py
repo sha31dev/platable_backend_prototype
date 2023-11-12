@@ -1,7 +1,7 @@
 import uuid
 from datetime import datetime
-from starlette.requests import Request
-from starlette.responses import JSONResponse
+from fastapi import Request
+from fastapi.responses import JSONResponse
 from src.infra.postgres import UnitOfWork
 from src.infra.postgres.repositories import (
     DonorsRepository,

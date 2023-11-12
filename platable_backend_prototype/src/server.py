@@ -1,6 +1,5 @@
+from fastapi import FastAPI
 from gunicorn.app.base import BaseApplication
-from starlette.applications import Starlette
-from starlette.routing import Route
 from typing import List, Optional
 from src.config import Config
 from src.util.exception_handler import ExceptionHandler
@@ -16,19 +15,13 @@ class Server(BaseApplication):
         self.__config = config
         self.__controllers = controllers if controllers else []
 
-        self.__app = Starlette()
+        self.__app = FastAPI()
         super().__init__()
 
         for controller in self.__controllers:
-            self.__app.routes.append(
-                Route(
-                    path=controller.path,
-                    endpoint=controller.handle,
-                    methods=controller.methods,
-                )
-            )
+            self.__app.api_route(path=controller.path, methods=controller.methods)(controller.handle)
 
-        self.__app.add_exception_handler(Exception, exception_handler.handle)
+        self.__app.exception_handler(Exception)(exception_handler.handle)
 
     def init(self, parser, opts, args):
         pass
@@ -44,6 +37,9 @@ class Server(BaseApplication):
 
     def load(self):
         return self.__app
+    
+    def set_openapi(self, openapi_spec: dict):
+        self.__app.openapi = lambda: openapi_spec
 
     def start(self):
         self.run()
